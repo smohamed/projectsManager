@@ -3,8 +3,9 @@ from http import HTTPStatus
 from fastapi import APIRouter
 from models.project import ProjectResponse
 from models.user import UserRequest, UserResponse
-from services.db import Db, get_exception
+from services.db import get_exception
 from services.models.user import User
+from services.repository.user import UserRepo
 
 error_invalid_company = {
     400: {'description': 'Not a valid company'}}
@@ -12,12 +13,12 @@ error_user_name__unique = {
     409: {'description': 'User name must be unique'}}
 
 api = APIRouter(prefix='/users', tags=['User'])
-db = Db()
+db = UserRepo()
 
 
 @api.get('/{user_id}/projects', response_model=list[ProjectResponse])
 async def get_projects(user_id: int):
-    return db.get_projects_by_user(user_id)
+    return db.get_projects(user_id)
 
 
 @api.post('/', response_model=UserResponse, status_code=HTTPStatus.CREATED,

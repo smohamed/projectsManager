@@ -1,10 +1,11 @@
 from http import HTTPStatus
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter
 from models.project import (ProjectDetailsResponse, ProjectRequest,
                             ProjectResponse)
-from services.db import Db, get_exception
+from services.db import get_exception
 from services.models.project import Project
+from services.repository.project import ProjectRepo
 
 error_invalid_project = {
     404: {'description': 'Project not found'}}
@@ -16,7 +17,7 @@ error_project_name__unique = {
     409: {'description': 'Project name must be unique'}}
 
 api = APIRouter(prefix='/projects', tags=['Project'])
-db = Db()
+db = ProjectRepo()
 
 
 @api.get('/', response_model=list[ProjectResponse])

@@ -16,3 +16,6 @@ src/routers/__pycache__/projects.cpython-39.pyc
 src/routers/__pycache__/users.cpython-39.pyc
 src/services/__pycache__/__init__.cpython-39.pyc
 src/services/models/__pycache__/__init__.cpython-39.pyc
+src/services/repository/__pycache__/company.cpython-39.pyc
+src/services/repository/__pycache__/project.cpython-39.pyc
+src/services/repository/__pycache__/user.cpython-39.pyc

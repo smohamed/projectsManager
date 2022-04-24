@@ -1,26 +1,27 @@
 from http import HTTPStatus
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter
 from models.company import CompanyRequest, CompanyResponse
 from models.project import ProjectResponse
-from services.db import Db, get_exception
+from services.db import get_exception
 from services.models.company import Company
+from services.repository.company import CompnayRepo
 
 error_company_name__unique = {
     409: {'description': 'Company name must be unique'}}
 
 api = APIRouter(prefix='/companies', tags=['Company'])
-db = Db()
+db = CompnayRepo()
 
 
 @api.get('/{company_id}/projects', response_model=list[ProjectResponse])
 async def get_projects(company_id: int):
-    return db.get_projects_by_company(company_id)
+    return db.get_projects(company_id)
 
 
 @api.get('/{company_id}/users/{user_id}/projects', response_model=list[ProjectResponse])
 async def get_projects(company_id: int, user_id: int):
-    return db.get_projects_by_company_and_user(company_id, user_id)
+    return db.get_projects_for_user(company_id, user_id)
 
 
 @api.post('/', response_model=CompanyResponse, status_code=HTTPStatus.CREATED,

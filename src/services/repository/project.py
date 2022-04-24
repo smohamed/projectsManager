@@ -49,12 +49,16 @@ class ProjectRepo(Db):
         finally:
             db.close()
 
-    def update_project_status(self, project_id: int, status: ProjectStatus) -> ProjectResponse:
+    def update_project_status(self, project_id: int, status: ProjectStatus,
+                              orignal_status: ProjectStatus) -> ProjectResponse:
         db: Session = self.DatabaseRef()
         try:
             project = db.get(Project, project_id)
             if not project:
-                return None
+                return 1
+
+            if project.status != orignal_status:
+                return 2
 
             project.status = status
             db.add(project)

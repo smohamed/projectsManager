@@ -9,9 +9,9 @@ from services.models.project import Project
 error_invalid_project = {
     404: {'description': 'Project not found'}}
 error_invalid_company = {
-    404: {'description': 'Not a valid company'}}
+    400: {'description': 'Not a valid company'}}
 error_invalid_user = {
-    404: {'description': 'Not a valid user'}}
+    400: {'description': 'Not a valid user'}}
 error_project_name__unique = {
     409: {'description': 'Project name must be unique'}}
 

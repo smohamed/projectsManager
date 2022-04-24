@@ -7,7 +7,7 @@ from services.db import Db, get_exception
 from services.models.user import User
 
 error_invalid_company = {
-    404: {'description': 'Not a valid company'}}
+    400: {'description': 'Not a valid company'}}
 error_user_name__unique = {
     409: {'description': 'User name must be unique'}}
 

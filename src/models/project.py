@@ -1,7 +1,15 @@
 from datetime import datetime
+from enum import Enum
 from typing import Optional
 
 from pydantic import BaseModel
+
+
+class ProjectStatus(Enum):
+    TO_DO = 'to do'
+    IN_PROGRESS = 'in progress'
+    FINISHED = 'finished'
+    CLOSED = 'closed'
 
 
 class ProjectBase(BaseModel):
@@ -23,6 +31,7 @@ class ProjectResponse(ProjectBase):
 
 class ProjectDetailsResponse(ProjectRequest):
     id: int
+    status: ProjectStatus
     created: datetime
     updated: Optional[datetime] = None
 

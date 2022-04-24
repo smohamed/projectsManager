@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session, sessionmaker
 
 from models.company import CompanyRequest, CompanyResponse
 from models.project import (ProjectDetailsResponse, ProjectRequest,
-                            ProjectResponse)
+                            ProjectResponse, ProjectStatus)
 from models.user import UserRequest, UserResponse
 from services.models.company import Company
 from services.models.db_base_model import DbBaseModel
@@ -119,7 +119,8 @@ class Db:
             if not user:
                 return 2
 
-            project = Project(**project.dict(), company=company, creator=user)
+            project = Project(
+                **project.dict(), status=ProjectStatus.TO_DO, company=company, creator=user)
             db.add(project)
             db.commit()
             db.refresh(project)

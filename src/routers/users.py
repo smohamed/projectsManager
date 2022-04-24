@@ -5,8 +5,11 @@ from models.project import ProjectResponse
 from models.user import UserRequest, UserResponse
 from services.db import Db
 
-api = APIRouter(
-    prefix='/users', responses={400: {"description": "Not a valid company"}})
+api = APIRouter(prefix='/users',
+                responses={
+                    404: {"description": "Not a valid company"}
+                },
+                tags=['User'])
 
 db = Db()
 

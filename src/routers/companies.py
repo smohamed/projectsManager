@@ -5,7 +5,7 @@ from models.company import CompanyRequest, CompanyResponse
 from models.project import ProjectResponse
 from services.db import Db
 
-api = APIRouter(prefix='/companies')
+api = APIRouter(prefix='/companies', tags=['Company'])
 db = Db()
 
 

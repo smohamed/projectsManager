@@ -6,10 +6,11 @@ from models.project import (ProjectDetailsResponse, ProjectRequest,
 from services.db import Db
 
 api = APIRouter(prefix='/projects',
-                         responses={
-                             400: {"description": "Company or user is not valid"},
-                             404: {"description": "Project not found"}
-                         })
+                responses={
+                    400: {"description": "Company or user is not valid"},
+                    404: {"description": "Project not found"}
+                },
+                tags=['Project'])
 
 db = Db()
 

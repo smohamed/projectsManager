@@ -1,10 +1,14 @@
-from models.company import CompanyRequest, CompanyResponse
-from models.project import ProjectDetailsResponse, ProjectRequest, ProjectResponse
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session, sessionmaker
-from models.user import UserRequest, UserResponse
 
-from services.db_models import Company, DbBaseModel, Project, User
+from models.company import CompanyRequest, CompanyResponse
+from models.project import (ProjectDetailsResponse, ProjectRequest,
+                            ProjectResponse)
+from models.user import UserRequest, UserResponse
+from services.models.company import Company
+from services.models.db_base_model import DbBaseModel
+from services.models.project import Project
+from services.models.user import User
 
 
 class Db:

@@ -5,10 +5,10 @@ from models.company import CompanyRequest, CompanyResponse
 from models.project import (ProjectDetailsResponse, ProjectRequest,
                             ProjectResponse)
 from models.user import UserRequest, UserResponse
-from services.models.company import Company
-from services.models.db_base_model import DbBaseModel
-from services.models.project import Project
-from services.models.user import User
+from .models.company import Company
+from .models.db_base_model import DbBaseModel
+from .models.project import Project
+from .models.user import User
 
 
 class Db:

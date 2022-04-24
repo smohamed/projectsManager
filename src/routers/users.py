@@ -1,10 +1,10 @@
 from http import HTTPStatus
 
 from fastapi import APIRouter
-from models.project import ProjectResponse
-from models.user import UserRequest, UserResponse
+from api_models.project import ProjectResponse
+from api_models.user import UserRequest, UserResponse
 from services.db import get_exception
-from services.models.user import User
+from services.db_models.user import User
 from services.repository.user import UserRepo
 
 error_invalid_company = {

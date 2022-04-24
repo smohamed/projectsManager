@@ -4,7 +4,7 @@ from fastapi import HTTPException
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from services.models.db_base_model import DbBaseModel
+from services.db_models.db_base_model import DbBaseModel
 
 
 def get_exception(error: Tuple[int, dict[str, str]]) -> HTTPException:

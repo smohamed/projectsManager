@@ -1,10 +1,10 @@
 from http import HTTPStatus
 
 from fastapi import APIRouter
-from models.project import (ProjectDetailsResponse, ProjectRequest,
+from api_models.project import (ProjectDetailsResponse, ProjectRequest,
                             ProjectResponse)
 from services.db import get_exception
-from services.models.project import Project
+from services.db_models.project import Project
 from services.repository.project import ProjectRepo
 
 error_invalid_project = {

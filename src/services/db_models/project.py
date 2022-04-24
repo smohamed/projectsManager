@@ -1,10 +1,9 @@
 from datetime import datetime
 
-from services.models.db_base_model import DbBaseModel
+from api_models.project import ProjectStatus
+from services.db_models.db_base_model import DbBaseModel
 from sqlalchemy import Column, DateTime, Enum, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
-
-from models.project import ProjectStatus
 
 
 class Project(DbBaseModel):

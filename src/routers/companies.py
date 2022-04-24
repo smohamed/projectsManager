@@ -1,10 +1,10 @@
 from http import HTTPStatus
 
+from api_models.company import CompanyRequest, CompanyResponse
+from api_models.project import ProjectResponse
 from fastapi import APIRouter
-from models.company import CompanyRequest, CompanyResponse
-from models.project import ProjectResponse
 from services.db import get_exception
-from services.models.company import Company
+from services.db_models.company import Company
 from services.repository.company import CompnayRepo
 
 error_company_name__unique = {

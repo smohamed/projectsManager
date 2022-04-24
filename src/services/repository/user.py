@@ -1,9 +1,9 @@
-from models.project import ProjectResponse
-from models.user import UserRequest, UserResponse
+from api_models.project import ProjectResponse
+from api_models.user import UserRequest, UserResponse
 from services.db import Db
-from services.models.company import Company
-from services.models.project import Project
-from services.models.user import User
+from services.db_models.company import Company
+from services.db_models.project import Project
+from services.db_models.user import User
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 

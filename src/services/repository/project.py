@@ -1,9 +1,9 @@
-from models.project import (ProjectDetailsResponse, ProjectRequest,
-                            ProjectResponse, ProjectStatus)
+from api_models.project import (ProjectDetailsResponse, ProjectRequest,
+                                ProjectResponse, ProjectStatus)
 from services.db import Db
-from services.models.company import Company
-from services.models.project import Project
-from services.models.user import User
+from services.db_models.company import Company
+from services.db_models.project import Project
+from services.db_models.user import User
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
@@ -20,8 +20,7 @@ class ProjectRepo(Db):
     def get_project(self, project_id: int) -> ProjectDetailsResponse:
         db: Session = self.DatabaseRef()
         try:
-            project = db.query(Project).filter(
-                Project.id == project_id).first()
+            project = db.get(Project, project_id)
             return project
         finally:
             db.close()
@@ -47,5 +46,19 @@ class ProjectRepo(Db):
             return project
         except IntegrityError:
             return 3
+        finally:
+            db.close()
+
+    def update_project_status(self, project_id: int, status: ProjectStatus) -> ProjectResponse:
+        db: Session = self.DatabaseRef()
+        try:
+            project = db.get(Project, project_id)
+            if not project:
+                return None
+
+            project.status = status
+            db.add(project)
+            db.commit()
+            return project
         finally:
             db.close()

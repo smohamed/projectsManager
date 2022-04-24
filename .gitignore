@@ -1,1 +1,9 @@
 src/projects.db
+.venv/
+Pipfile
+src/__pycache__/main.cpython-39.pyc
+src/models/__pycache__/company.cpython-39.pyc
+src/models/__pycache__/project.cpython-39.pyc
+src/models/__pycache__/user.cpython-39.pyc
+src/services/__pycache__/db_models.cpython-39.pyc
+src/services/__pycache__/db.cpython-39.pyc

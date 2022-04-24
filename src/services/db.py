@@ -1,14 +1,22 @@
+from typing import Tuple
+
+from fastapi import HTTPException
 from sqlalchemy import create_engine
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session, sessionmaker
 
 from models.company import CompanyRequest, CompanyResponse
 from models.project import (ProjectDetailsResponse, ProjectRequest,
                             ProjectResponse)
 from models.user import UserRequest, UserResponse
-from .models.company import Company
-from .models.db_base_model import DbBaseModel
-from .models.project import Project
-from .models.user import User
+from services.models.company import Company
+from services.models.db_base_model import DbBaseModel
+from services.models.project import Project
+from services.models.user import User
+
+
+def get_exception(error: Tuple[int, dict[str, str]]) -> HTTPException:
+    return HTTPException(status_code=error[0], detail=error[1]['description'])
 
 
 class Db:
@@ -75,6 +83,8 @@ class Db:
             db.commit()
             db.refresh(company)
             return company
+        except IntegrityError:
+            return 1
         finally:
             db.close()
 
@@ -84,13 +94,15 @@ class Db:
             company = db.query(Company).filter(
                 Company.id == user.company_id).first()
             if not company:
-                return None
+                return 1
 
             user = User(**user.dict(), company=company)
             db.add(user)
             db.commit()
             db.refresh(user)
             return user
+        except IntegrityError:
+            return 2
         finally:
             db.close()
 
@@ -100,17 +112,19 @@ class Db:
             company = db.query(Company).filter(
                 Company.id == project.company_id).first()
             if not company:
-                return None
+                return 1
 
             user = db.query(User).filter(
                 User.id == project.user_id and User.company == project.company_id).first()
             if not user:
-                return None
+                return 2
 
             project = Project(**project.dict(), company=company, creator=user)
             db.add(project)
             db.commit()
             db.refresh(project)
             return project
+        except IntegrityError:
+            return 3
         finally:
             db.close()

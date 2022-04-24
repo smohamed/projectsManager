@@ -1,16 +1,17 @@
 from http import HTTPStatus
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter
 from models.project import ProjectResponse
 from models.user import UserRequest, UserResponse
-from services.db import Db
+from services.db import Db, get_exception
+from services.models.user import User
 
-api = APIRouter(prefix='/users',
-                responses={
-                    404: {"description": "Not a valid company"}
-                },
-                tags=['User'])
+error_invalid_company = {
+    404: {'description': 'Not a valid company'}}
+error_user_name__unique = {
+    409: {'description': 'User name must be unique'}}
 
+api = APIRouter(prefix='/users', tags=['User'])
 db = Db()
 
 
@@ -19,10 +20,13 @@ async def get_projects(user_id: int):
     return db.get_projects_by_user(user_id)
 
 
-@api.post('/', response_model=UserResponse, status_code=HTTPStatus.CREATED)
+@api.post('/', response_model=UserResponse, status_code=HTTPStatus.CREATED,
+          responses={**error_invalid_company, **error_user_name__unique})
 async def create_user(user: UserRequest):
     user = db.create_user(user)
-    if user:
+    if user and isinstance(user, User):
         return user
+    elif user == 1:
+        raise get_exception(list(error_invalid_company.items())[0])
     else:
-        raise HTTPException(status_code=400, detail="Not a valid company")
+        raise get_exception(list(error_user_name__unique.items())[0])

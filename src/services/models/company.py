@@ -1,4 +1,4 @@
-from ..models.db_base_model import DbBaseModel
+from services.models.db_base_model import DbBaseModel
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
 

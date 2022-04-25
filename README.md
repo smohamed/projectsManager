@@ -9,6 +9,9 @@
 	- cd src
 	- uvicorn main:app --reload
 
+4. The service will be accessible at http://localhost:5001:
+	- OpenAPI: http://localhost:5001/docs
+	- The OpenAPI endpoint is a fully functional client that allows execution of all APIs without the need for a 3rd party component
 
 **I have provided 2 scripts that automate the setup and run of the program (installReqAndRun.sh & run.sh)**
 

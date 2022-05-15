@@ -9,13 +9,13 @@
 	- cd src
 	- uvicorn main:app --reload
 
-4. The service will be accessible at http://localhost:5001:
-	- OpenAPI: http://localhost:5001/docs
+4. The service will be accessible at http://localhost:8000:
+	- OpenAPI: http://localhost:8000/docs
 	- The OpenAPI endpoint is a fully functional client that allows execution of all APIs without the need for a 3rd party component
 
 **I have provided 2 scripts that automate the setup and run of the program (installReqAndRun.sh & run.sh)**
 
-I have also decided to use [fastapi](https://fastapi.tiangolo.com "fastapi") as the framework of choice to run the web service as well as using [SQLAlchemy](https://www.sqlalchemy.org/ "SQLAlchemy") as the ORM framework for all database related work. The reason is, I was already experimenting with both frameworks and I think they constitute a very good tech-stack for this kind of work. This assignment kind of doubled as a POC for what I'm looking forward for :).
+I have also decided to use [fastapi](https://fastapi.tiangolo.com "fastapi") as the framework of choice to run the web service as well as using [SQLAlchemy](https://www.sqlalchemy.org/ "SQLAlchemy") as the ORM framework for all database related work.
 
 
 #### Notes regarding system security:
